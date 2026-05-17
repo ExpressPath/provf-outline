@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>iVucx-ExpressPath</title>
+  <title>PROVF Privacy Policy and App Purpose</title>
   <link rel="icon" href="iVx-Logo.png" type="image/png">
   <style>
     :root{
@@ -137,29 +137,29 @@
     <nav class="toc">
       <strong>Table of contents</strong>
       <ul>
-        <li><a href="#one-line">1. One-line definition</a></li>
-        <li><a href="#core-objects">2. Core objects and state model (mathematical)</a></li>
-        <li><a href="#identity">3. Identity and anonymity rules (strict)</a></li>
-        <li><a href="#content">4. Content types and publication</a></li>
-        <li><a href="#ivucx">5. iVucx currency and payment rules (strict)</a></li>
-        <li><a href="#lifecycle">6. Posting lifecycle, edits, and review cadence</a></li>
-        <li><a href="#bounties">7. Additional bounties, split, and incentives</a></li>
-        <li><a href="#trust">8. Trust scoring — formal</a></li>
-        <li><a href="#feed">9. Feed ranking for potential answerers</a></li>
-        <li><a href="#resolution">10. Resolution flows, deadlines, and automatic distributions</a></li>
-        <li><a href="#debate">11. Debate mechanism and J/G/H states (formal)</a></li>
-        <li><a href="#papers">12. Papers, citation, and reuse rules</a></li>
-        <li><a href="#fraud">13. Fraud & abuse defenses (strict)</a></li>
-        <li><a href="#legal">14. Legal and compliance constraints (high level)</a></li>
-        <li><a href="#minors">15. Minors / payout design</a></li>
-        <li><a href="#data-model">16. Data model (core tables)</a></li>
-        <li><a href="#api">17. API surface (selected endpoints)</a></li>
-        <li><a href="#ui">18. UI rules and UX cues (key decisions)</a></li>
-        <li><a href="#kpis">19. KPIs and evaluation</a></li>
-        <li><a href="#mvp">20. Implementation priorities (MVP)</a></li>
-        <li><a href="#risks">21. Risks & mitigations (short)</a></li>
-        <li><a href="#summary">22. Final conceptual summary (short)</a></li>
-        <li><a href="#appendix">Appendix: Formal evaluation method (integrated)</a></li>
+        <li><a href="#one-line">1. PROVF app identity</a></li>
+        <li><a href="#core-objects">2. App purpose</a></li>
+        <li><a href="#identity">3. User consent and file selection</a></li>
+        <li><a href="#content">4. Information PROVF accesses</a></li>
+        <li><a href="#ivucx">5. Google user data</a></li>
+        <li><a href="#lifecycle">6. Use of selected files</a></li>
+        <li><a href="#bounties">7. Platform storage</a></li>
+        <li><a href="#trust">8. Privacy policy</a></li>
+        <li><a href="#feed">9. Sharing and disclosure</a></li>
+        <li><a href="#resolution">10. Limited use commitments</a></li>
+        <li><a href="#debate">11. User controls</a></li>
+        <li><a href="#papers">12. Retention and deletion</a></li>
+        <li><a href="#fraud">13. Security measures</a></li>
+        <li><a href="#legal">14. Legal and compliance</a></li>
+        <li><a href="#minors">15. Intended users</a></li>
+        <li><a href="#data-model">16. Data categories</a></li>
+        <li><a href="#api">17. Processing surface</a></li>
+        <li><a href="#ui">18. User-facing notices</a></li>
+        <li><a href="#kpis">19. Policy accuracy</a></li>
+        <li><a href="#mvp">20. Operational commitments</a></li>
+        <li><a href="#risks">21. Risk controls</a></li>
+        <li><a href="#summary">22. Summary</a></li>
+        <li><a href="#appendix">Appendix: contact and updates</a></li>
       </ul>
     </nav>
   </aside>
@@ -167,364 +167,307 @@
   <main class="main" role="main" id="mainPane">
     <div class="content-inner">
       <header>
-        <img class="site-icon" src="iVx-Logo.png" alt="iVucx-ExpressPath icon">
-        <h1>iVucx-ExpressPath — Formal Specification</h1>
-        <p class="lead">This document is a precise, unambiguous specification of Express-Path. It preserves the original semantics and fills omitted or simplified items with explicit, configurable defaults and recommended values while keeping all rules deterministic and implementable.</p>
+        <img class="site-icon" src="iVx-Logo.png" alt="PROVF icon">
+        <h1>PROVF Privacy Policy and App Purpose</h1>
+        <p class="lead">This page identifies PROVF, describes its purpose, and explains how PROVF accesses, uses, stores, and protects user-selected files and related Google user data. Last updated: May 17, 2026.</p>
       </header>
 
       <section id="one-line">
-        <h2>1. One-line definition</h2>
+        <h2>1. PROVF app identity</h2>
         <p>
-          Express-Path is an anonymous, non-reputation knowledge marketplace and publication system in which each submission's reward and citation eligibility are determined solely by the submission's content quality; payments and contributions use a platform-managed internal currency called <strong>iVucx</strong>; answers and papers may be multimodal (text, structured mathematics, code, audio, video); per-post anonymity is enforced by generating a new display identifier for every post; and adjudication (trust scoring, debate outcomes, and citation decisions) is algorithmic with human oversight and auditable logs.
+          <strong>PROVF</strong> is an application that lets users choose files, read those selected files, and save them to the PROVF platform for storage and later use by the user. PROVF does not represent itself as a Google product and does not use Google branding in its app name.
         </p>
       </section>
 
       <section id="core-objects">
-        <h2>2. Core objects and state model (mathematical)</h2>
+        <h2>2. App purpose</h2>
 
-        <p><strong>Sets and primary mappings</strong> (explicit):</p>
+        <p><strong>Purpose of PROVF</strong>:</p>
 
         <ul>
-          <li><strong>Users</strong>: \(U\). Each physical person has one or more internal accounts; each account is represented by an internal identifier \(u\in U\). The backend stores the mapping from account to real-world identity for compliance; the UI never exposes persistent identity.</li>
-
-          <li><strong>Posts (questions / problems / papers)</strong>: \(Q\). For each post \(q\in Q\) the system stores:
-            <ul>
-              <li>internal poster id \(p_q\in U\) (backend only);</li>
-              <li>per-post display identifier \(id_{\mathrm{ui}}(q)\) (UUIDv4 string, unique, never reused);</li>
-              <li>initial bounty \(B_0(q)\in\mathbb{R}_{\ge 0}\) denominated in iVucx;</li>
-              <li>classification \(c_q\in\{\text{academic},\text{problem},\text{boundary}\}\) computed by classifier \(f_{\mathrm{class}}(q)\);</li>
-              <li>immutable edit history \(hist_q\) (append-only version log);</li>
-              <li>status \(s_q\in\{\text{open},\text{in\_debate},\text{resolved},\text{J},\text{G},\text{H},\text{N\#},\text{closed}\}\).</li>
-            </ul>
-          </li>
-
-          <li><strong>Answers</strong>: \(A\). For each answer \(a\in A\):
-            <ul>
-              <li>responder \(r_a\in U\) (backend only);</li>
-              <li>content \(C_a\) (multimodal payload);</li>
-              <li>feature vector \(\mathbf{s}_a\) (JSON of extracted features);</li>
-              <li>trust score \(T(a,q)\in[0,1]\);</li>
-              <li>creation timestamp \(t_a\).</li>
-            </ul>
-          </li>
-
-          <li><strong>Supporters</strong>: for each post \(q\), supporters set \(S_q\) contains accounts that contributed additional bounty.</li>
-
-          <li><strong>Ledger</strong>: balances \(bal(u)\), escrow accounts \(escrow(q)\), and total supply \(S_{\mathrm{tot}}\). The ledger invariant is strictly enforced:</li>
+          <li>Allow a user to intentionally select a file from the user's device, cloud storage, or an authorized Google account.</li>
+          <li>Read the file selected by the user so the file can be uploaded, stored, displayed, managed, processed, or retrieved through PROVF.</li>
+          <li>Save a copy of the selected file and related metadata on the PROVF platform under the user's account or session.</li>
+          <li>Maintain an operational record of file upload, storage, retrieval, and deletion activity for security, reliability, and support.</li>
         </ul>
 
-        <div class="math-block">
-          \[ \sum_{u\in U} bal(u) + \sum_{q\in Q} escrow(q) = S_{\mathrm{tot}}. \]
-        </div>
-
-        <p>All monetary operations are recorded as immutable double-entry ledger transactions with unique transaction identifiers and timestamps.</p>
+        <p>PROVF only needs access to files that the user selects or authorizes. The core purpose is file reading and platform storage, not advertising, data brokerage, or unrelated profiling.</p>
       </section>
 
       <section id="identity">
-        <h2>3. Identity and anonymity rules (strict)</h2>
+        <h2>3. User consent and file selection</h2>
 
         <ul>
-          <li>The UI displays only a per-post display identifier \(id_{\mathrm{ui}}(q)\) (UUIDv4). No persistent username, handle, follower lists, or reputation scores are shown.</li>
-          <li>There is no UI-level aggregation of posts by the same poster; the platform must not provide search or filters that reveal cross-post identity correlations.</li>
-          <li>The backend retains mapping \(p_q \mapsto \text{account}\) for compliance and fraud investigation; access to this mapping is strictly controlled and audited.</li>
-          <li>Multiple accounts per person are permitted at the UI level; backend fraud detection may restrict abusive patterns. No UI advantage (e.g., reputation) accrues from multiple accounts.</li>
-          <li>No organization or team pages are exposed; organizational affiliation fields are not supported in the public UI.</li>
+          <li>PROVF acts only after the user selects a file, starts an upload, or grants account-level authorization through a supported sign-in or file picker flow.</li>
+          <li>When Google authorization is used, PROVF requests only the permissions needed to identify the user and access the files the user chooses to provide.</li>
+          <li>PROVF does not intentionally access, read, or copy files that the user has not selected or authorized.</li>
+          <li>The user may decide not to provide a file. In that case, PROVF will not read or store that file.</li>
+          <li>Any permission screen, upload screen, or file picker should clearly connect the requested access to PROVF's file storage purpose.</li>
         </ul>
       </section>
 
       <section id="content">
-        <h2>4. Content types and publication</h2>
+        <h2>4. Information PROVF accesses</h2>
 
-        <p>Supported submission modalities: plain text, structured mathematics (LaTeX/MathML), code packages (archive with manifest), runnable notebooks or interactive sandboxes (with resource limits), audio, video, and PDF. Posts may combine modalities.</p>
+        <p>Depending on how the user uses PROVF, the app may access the following information:</p>
 
-        <p>File constraints: maximum file sizes, allowed codecs/containers, and thumbnail requirements are configuration parameters; recommended defaults are documented in the operational deployment guide (not repeated here).</p>
+        <ul>
+          <li><strong>Selected file contents</strong>: the actual contents of files the user chooses to upload or import.</li>
+          <li><strong>Selected file metadata</strong>: file name, file type, MIME type, file size, source location, timestamps, and technical identifiers needed to process the file.</li>
+          <li><strong>Account information</strong>: basic sign-in information such as user ID, email address, and display name when needed for authentication, account association, or support.</li>
+          <li><strong>Usage and system data</strong>: upload status, processing status, error logs, access logs, device/browser details, and security events.</li>
+        </ul>
 
-        <p><strong>Papers</strong>: a paper is a post subtype with required metadata fields: title, abstract, authorship declaration (internal only), license selection (e.g., CC-BY, CC-BY-SA, CC0). Authors retain copyright; the platform records the chosen license in metadata.</p>
+        <p>PROVF uses this information to provide the file storage service requested by the user and to keep the platform reliable and secure.</p>
       </section>
 
       <section id="ivucx">
-        <h2>5. iVucx currency and payment rules (strict)</h2>
+        <h2>5. Google user data</h2>
 
-        <h3>Basic properties</h3>
+        <h3>Google account and file data</h3>
         <ul>
-          <li>iVucx is a centrally-managed internal ledger currency. Minting occurs only when: (a) verified adult users deposit fiat via approved channels and the platform credits iVucx; or (b) platform operations inject funds (sponsor pools, grants).</li>
-          <li>Minors cannot deposit fiat directly; minors may receive iVucx via platform reward flows subject to the minors policy (§15).</li>
-          <li>Withdrawals convert iVucx to external fiat subject to KYC/AML, withdrawal limits, and hold periods. Withdrawal rules are tiered by account age, verification level, and transaction risk score.</li>
+          <li>If the user signs in with Google, PROVF may receive basic profile information needed for authentication and account association.</li>
+          <li>If the user chooses a file from Google Drive or another Google-provided file source, PROVF reads the selected file and its associated metadata only for the purpose described on this page.</li>
+          <li>PROVF stores the selected Google file content on the PROVF platform when the user chooses to upload, import, or save that file.</li>
+          <li>PROVF does not use Google user data to serve ads, sell data, build unrelated profiles, or train unrelated machine learning models.</li>
         </ul>
 
-        <h3>Escrow and payouts</h3>
-        <p>When a poster creates a bounty, the poster transfers \(B_0(q)\) from their balance to escrow \(escrow(q)\). On acceptance, the platform transfers escrow to the selected answerer minus platform fee \(f\). If multiple payouts occur (automatic distribution), the platform follows the distribution rules in §10.</p>
+        <h3>Scope of access</h3>
+        <p>PROVF's Google data access is limited to the minimum data needed for sign-in, user-authorized file selection, file reading, and platform storage. The user remains in control of which files are selected for PROVF.</p>
 
-        <h3>Fees and economics</h3>
-        <ul>
-          <li>Platform fee \(f\) is configurable; recommended default \(f=0.10\) (10%). Fee revenue funds operations, reserves, and anti-abuse sinks.</li>
-          <li>Ledger invariants and double-entry accounting are enforced; all mint/burn operations are logged and require operator authorization and audit trails.</li>
-        </ul>
+        <h3>Revocation</h3>
+        <p>Users can revoke Google account permissions through their Google Account security settings. Revocation may stop future imports from Google, but it does not automatically delete files already saved to PROVF unless the user also requests deletion from PROVF.</p>
       </section>
 
       <section id="lifecycle">
-        <h2>6. Posting lifecycle, edits, and review cadence</h2>
+        <h2>6. Use of selected files</h2>
 
-        <p><strong>Poster obligations:</strong> the poster must perform at least one review action every 60 days. A review action is one of: accept an answer, start a debate, add a clarifying edit, or explicitly select "no action — auto resolution". Failure to act triggers the automatic resolution process described in §10.</p>
+        <p><strong>Primary use:</strong> PROVF reads selected files so they can be saved on the PROVF platform and made available to the user inside PROVF.</p>
 
-        <p><strong>Edits and history:</strong> all edits are versioned and appended to \(hist_q\). Search indices and trust-scoring are recomputed against the latest version; historical versions remain accessible to authorized auditors.</p>
+        <p><strong>Operational use:</strong> PROVF may inspect file type, file size, upload status, and technical metadata to validate uploads, prevent abuse, provide previews, restore access, troubleshoot errors, and protect the service.</p>
 
-        <p><strong>Deletion and supporter consent:</strong> if \(S_q\) is non-empty, any permanent deletion or content erasure requires unanimous consent from the set \(\{p_q\}\cup S_q\). Consent is recorded as signed transactions (cryptographic signatures or authenticated API calls) and stored in the audit log.</p>
+        <p><strong>Support use:</strong> PROVF may use logs and file metadata to respond to support requests. Human access to file contents should be limited to cases where the user requests support, legal compliance requires it, or security review is necessary.</p>
       </section>
 
       <section id="bounties">
-        <h2>7. Additional bounties, split, and incentives</h2>
+        <h2>7. Platform storage</h2>
 
-        <p>Any account may add additional bounty \(b>0\) to an unresolved post \(q\). Each addition is recorded with contributor id, amount, and timestamp; the contributor becomes a stakeholder in the post's state.</p>
+        <p>When a user chooses to save a file through PROVF, the file is stored on the PROVF platform. Stored data may include the file contents, file name, file type, file size, upload time, owner or account identifier, and processing status.</p>
 
-        <p><strong>Poster share:</strong> the poster receives 10% of the sum of additional bounties \(B_{\mathrm{add}}=\sum b\). Formally, poster credit = \(0.10\cdot B_{\mathrm{add}}\). Implementation may credit immediately or reserve until resolution; the chosen operational policy must be documented and consistent.</p>
+        <p><strong>Storage location:</strong> PROVF may use managed hosting, databases, object storage, backup systems, and security monitoring tools to provide the service. Stored files remain associated with the user's PROVF account or session unless deleted under the deletion process described below.</p>
 
-        <p><strong>G trigger:</strong> if total bounty \(B_{\mathrm{total}} = B_0 + B_{\mathrm{add}} \ge (\pi/e)\cdot B_0\) (numerical factor ≈ 1.15572734979), the system flags the post for special continuation processing ("G" flow) as described in §11.</p>
+        <p><strong>Access control:</strong> PROVF is designed so that stored files are available to the user who saved them and to authorized systems needed to operate the platform.</p>
       </section>
 
       <section id="trust">
-        <h2>8. Trust scoring — formal definition of \(T(a,q)\)</h2>
+        <h2>8. Privacy policy</h2>
 
-        <p>Because author reputations are hidden, each answer \(a\) receives a machine-generated trust score \(T(a,q)\in[0,1]\) computed from an explicit feature vector \(\mathbf{s}_a\). The score is the calibrated probability estimate that the answer is relevant, internally consistent, and factually precise under the platform's definitions.</p>
+        <p>This Privacy Policy applies specifically to <strong>PROVF</strong>. It explains what PROVF does with information obtained from users, including Google user data and files selected by the user.</p>
 
-        <h3>Feature vector (examples)</h3>
+        <h3>Policy commitments</h3>
         <ul>
-          <li>\(<span class="math">s_1</span>\): source_quality — normalized measure of primary/peer-reviewed citations;</li>
-          <li>\(<span class="math">s_2</span>\): evidence_depth — structured stepwise reasoning length and explicitness;</li>
-          <li>\(<span class="math">s_3</span>\): reproducibility_score — fraction of runnable artifacts that execute and reproduce claimed outputs;</li>
-          <li>\(<span class="math">s_4</span>\): logical_coherence — LLM-based argumentation consistency score;</li>
-          <li>\(<span class="math">s_5</span>\): originality_penalty — plagiarism or duplication penalty;</li>
-          <li>\(<span class="math">s_6</span>\): modality_quality — alignment and clarity for audio/video transcripts;</li>
-          <li>\(<span class="math">s_7</span>\): external_fact_check — retrieval-augmented verification match ratio;</li>
-          <li>\(<span class="math">s_8</span>\): uncertainty_expression — presence of calibrated uncertainty language.</li>
+          <li>PROVF collects and processes only the information needed to provide the file reading and storage functions requested by the user.</li>
+          <li>PROVF discloses that selected files are read and stored on the PROVF platform.</li>
+          <li>PROVF keeps this policy current when its data practices materially change.</li>
+          <li>PROVF's published use of Google user data is limited to the practices described in this policy.</li>
         </ul>
 
-        <h3>Model and calibration</h3>
-        <p>Compute raw score \(S_{\mathrm{raw}} = g(\mathbf{s}_a)\) where \(g\) is a deterministic scoring function (linear model or small neural network with fixed architecture). Calibrate \(S_{\mathrm{raw}}\) to a probability \(T\) using isotonic regression or Platt scaling trained on labeled examples to minimize Brier score. For transparency, the system must expose the top contributing features and their weights for each \(T\) value.</p>
-
-        <p><strong>Display rule:</strong> answers are presented sorted by \(T\) descending by default; the poster's decision UI must show the same ordering and the trust-score explanation for each answer.</p>
+        <p>This page is intended to serve as the PROVF privacy policy and app purpose disclosure for users and for app verification review.</p>
       </section>
 
       <section id="feed">
-        <h2>9. Feed ranking for potential answerers</h2>
+        <h2>9. Sharing and disclosure</h2>
 
-        <p>Feed ranking is lexicographic: primary key is relevance score \(\mathrm{Rel}(u,q)=\cos(E(u),E(q))\) where \(E(\cdot)\) are embeddings; secondary key is bounty \(B_q\) descending. Users may optionally declare expertise tags (not public) to seed \(E(u)\); the platform may also infer skill embeddings from opt-in profile data. The feed endpoint returns results sorted by (Rel desc, B desc).</p>
+        <p>PROVF does not sell user files, Google user data, or account data. PROVF does not share selected file contents with third parties for advertising or unrelated marketing.</p>
+
+        <p>PROVF may share or process data only in the following limited situations:</p>
+
+        <ul>
+          <li>With service providers that host, store, secure, monitor, or operate the PROVF platform under appropriate confidentiality and security obligations.</li>
+          <li>When the user requests an action that requires sharing, export, transfer, or support.</li>
+          <li>When required to comply with applicable law, legal process, security obligations, or abuse prevention.</li>
+          <li>As part of a business transfer, only if the receiving party continues to protect the data consistently with this policy.</li>
+        </ul>
       </section>
 
       <section id="resolution">
-        <h2>10. Resolution flows, deadlines, and automatic distributions</h2>
+        <h2>10. Limited use commitments</h2>
 
-        <p><strong>Deadlines:</strong> default deadlines are configurable; recommended defaults: if \(c_q=\text{problem}\) then \(D=30\) days; if \(c_q=\text{academic}\) then \(D=60\) days. Deadlines reset on substantive poster edits or when the poster explicitly extends the deadline.</p>
+        <p>PROVF's use and transfer of information received from Google APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements, where applicable.</p>
 
-        <h3>Poster acceptance</h3>
-        <p>The poster may accept exactly one answer. On acceptance, the platform transfers escrow \(escrow(q)\) to the accepted answerer minus fee \(f\). The accepted answer receives a recorded acceptance timestamp and becomes the canonical resolution unless a debate later overturns it.</p>
+        <h3>PROVF will not</h3>
+        <ul>
+          <li>Use Google user data for unrelated advertising.</li>
+          <li>Sell Google user data or selected file contents.</li>
+          <li>Use selected Google file contents for unrelated profiling.</li>
+          <li>Read files from a Google account unless the user selected or authorized the relevant files.</li>
+        </ul>
 
-        <h3>Automatic resolution (poster non-action)</h3>
-        <p>If the poster does not act by the deadline, the platform executes the automatic distribution:</p>
-
-        <ol>
-          <li>Select top-\(<span class="math">k=3</span>\) answers by trust score \(T\). If fewer than \(k\) answers exist, use all available answers.</li>
-          <li>Let the selected answers have trust scores \(T_1,\dots,T_k\). Compute provisional payout for answer \(i\):</li>
-        </ol>
-
-        <div class="math-block">
-          \[ A_i = \left\lfloor \frac{T_i}{\sum_{j=1}^k T_j} \cdot B_{\mathrm{escrow}} \cdot (1-f) \right\rfloor. \]
-        </div>
-
-        <p>Rounding uses floor; any residual (escrow remainder after sum of \(A_i\)) is retained by the platform reserve by default unless an alternative residual policy is configured (e.g., distribute residual to highest-ranked answerer). The post is marked N# ("Not citable") when automatic distribution occurs without poster acceptance; N# posts are not eligible for citation (§12).</p>
+        <h3>PROVF may</h3>
+        <ul>
+          <li>Read selected files to complete the upload or import requested by the user.</li>
+          <li>Store selected files on the PROVF platform.</li>
+          <li>Use file metadata and operational logs for reliability, security, debugging, and support.</li>
+          <li>Comply with valid legal, safety, or security requirements.</li>
+        </ul>
       </section>
 
       <section id="debate">
-        <h2>11. Debate mechanism and J/G/H states (formal)</h2>
+        <h2>11. User controls</h2>
 
-        <p>The debate process is an explicit, time-bounded adjudication mechanism initiated by the poster or by stakeholder action. Participants are partitioned into two teams: Supporters (contributors to \(S_q\) or their delegates) and Answerers (authors of answers and their supporters). Each team submits claims, evidence, and rebuttals within the debate window (default 30 days). The platform computes deterministic claim extraction, overlap, and team composite scores to decide outcomes.</p>
+        <p>Users have practical controls over how PROVF receives and stores their files:</p>
 
-        <h3>Per-claim metric</h3>
-        <p>For any claim or answer compute a per-claim metric</p>
-
-        <div class="math-block">
-          \[ \mathcal{L} = \mathcal{Q}\cdot\alpha\cdot\mathcal{F}, \]
-        </div>
-
-        <p>where \(\mathcal{Q}\) is calibrated relevance probability, \(\alpha\) is calibrated internal-consistency probability, and \(\mathcal{F}\) is calibrated factual-precision probability as defined in the Appendix (integrated evaluation method). These components must be calibrated probabilities (see Appendix §Calibration).</p>
-
-        <h3>Team aggregation and uniqueness</h3>
-        <p>Aggregate per-claim metrics into a team-level weighted mean \(\bar{\mathcal{L}}_{\mathrm{team}}\) with weights proportional to evidence depth and citation counts. Compute claim-set overlap between teams: for Supporters claim set \(C_S\) and Answerers claim set \(C_A\), define overlap coefficient</p>
-
-        <div class="math-block">
-          \[ d = \frac{|C_A \cap C_S|}{|C_A \cup C_S|}, \qquad U = 1 - d. \]
-        </div>
-
-        <p>Team raw score is</p>
-
-        <div class="math-block">
-          \[ R_{\mathrm{team}} = \log(\bar{\mathcal{L}}_{\mathrm{team}} + \epsilon)\cdot U^\beta, \]
-        </div>
-
-        <p>with small \(\epsilon>0\) to avoid \(\log(0)\) and configurable exponent \(\beta\ge0\) to control uniqueness weighting. Normalize \(R_{\mathrm{team}}\) to a z-score using the historical distribution of \(R\) values:</p>
-
-        <div class="math-block">
-          \[ Z_{\mathrm{team}} = \frac{R_{\mathrm{team}} - \mu_R}{\sigma_R}, \]
-        </div>
-
-        <p>where \(\mu_R,\sigma_R\) are running mean and standard deviation computed from a rolling historical window (configurable; recommended 12 months of data or 10,000 debates, whichever is larger).</p>
-
-        <h3>Decision thresholds</h3>
         <ul>
-          <li>If a team achieves \(Z_{\mathrm{team}} \ge \tau_J\) (recommended \(\tau_J=2.33\), corresponding to one-sided 1% tail under normality) then that team is awarded state <strong>J</strong> (Journal-level accepted). The winning answer(s) become citable and receive canonical identifiers.</li>
-          <li>If neither team reaches \(\tau_J\) but total bounty \(B_{\mathrm{total}} \ge (\pi/e)\cdot B_0\), the system triggers <strong>G</strong> processing: extend debate window by a configured extension (recommended 30 days) and optionally require additional evidence submission; supporters may be required to reconfirm stakes.</li>
-          <li>If neither condition holds by debate window close, the post is assigned <strong>H</strong> (no decisive acceptance) and then marked <strong>N#</strong> (Not citable); automatic distribution rules (§10) apply.</li>
+          <li>Choose which files to upload or import into PROVF.</li>
+          <li>Decline to provide a file or stop an upload when the interface allows it.</li>
+          <li>Delete files from PROVF where deletion controls are available.</li>
+          <li>Request assistance or deletion by contacting PROVF support.</li>
+          <li>Revoke Google permissions from the user's Google Account settings.</li>
         </ul>
 
-        <p>All claim extraction, canonicalization, and overlap computations are deterministic functions of the submitted text and evidence; the same deterministic pipeline is applied to both teams to ensure fairness.</p>
+        <p>Some operational records may remain for security, audit, backup, legal, or abuse-prevention purposes for a limited period after a file is deleted from active storage.</p>
       </section>
 
       <section id="papers">
-        <h2>12. Papers, citation, and reuse rules</h2>
+        <h2>12. Retention and deletion</h2>
 
-        <p>Only items with J status are permitted to be cited by future platform publications. J items receive a stable canonical identifier (CID), metadata fields (accepted_date, debate_id, Z_score, evidence summary), and are indexed in the platform citation index. N# items are explicitly excluded from citation and from being used as authoritative evidence in debates or papers.</p>
+        <p>PROVF retains selected files and related metadata for as long as needed to provide the platform storage service, maintain the user's account, comply with legal obligations, resolve disputes, prevent abuse, and keep backup or audit records.</p>
+
+        <p><strong>Deletion requests:</strong> when a user deletes a file or requests deletion, PROVF will remove the file from active storage within a reasonable time unless retention is required for legal, security, or operational reasons.</p>
+
+        <p><strong>Backups:</strong> copies in backups or disaster-recovery systems may remain until those backups expire or are overwritten under PROVF's normal backup cycle.</p>
       </section>
 
       <section id="fraud">
-        <h2>13. Fraud & abuse defenses (strict)</h2>
+        <h2>13. Security measures</h2>
 
-        <p>Signals used for detection: device fingerprinting, IP heuristics, behavioral embeddings, temporal posting patterns, and ledger flow graphs. Detection algorithms include graph analytics (k-core, Louvain community detection), LSH/MinHash duplicate detection on content embeddings, and temporal anomaly detectors for rapid fund movements.</p>
+        <p>PROVF uses administrative, technical, and organizational safeguards designed to protect selected files and account data. These safeguards may include encrypted transport, access controls, authentication controls, logging, monitoring, backups, and separation of production access responsibilities.</p>
 
-        <p>Mitigations: withdrawal delays for new or high-risk accounts, tiered withdrawal limits, holds on suspicious funds, manual review for high-value transactions, and penalization of trust scores \(T\) when plagiarism or collusion is detected. All mitigation actions are logged in the immutable audit log.</p>
+        <p>No online service can guarantee absolute security. PROVF works to reduce risk by limiting access, collecting only relevant data, and using operational controls appropriate for file storage services.</p>
       </section>
 
       <section id="legal">
-        <h2>14. Legal and compliance constraints (high level)</h2>
+        <h2>14. Legal and compliance</h2>
 
-        <p>Implement KYC/AML for depositors and for accounts performing significant withdrawals. Payment operations must comply with applicable payment services and prepaid instrument regulations. Minors require special handling (§15). DMCA and other takedown flows must be supported. High-risk advice categories (medical, legal, financial) must include explicit disclaimers and may be excluded from automatic acceptance or J-status without human review.</p>
+        <p>PROVF may retain, access, or disclose information when necessary to comply with applicable law, enforce terms, respond to lawful requests, protect users, protect the platform, or investigate suspected misuse.</p>
+
+        <p>Users are responsible for ensuring that they have the right to upload, import, and store the files they choose to provide to PROVF. Users should not upload files that they are not allowed to store or process through PROVF.</p>
       </section>
 
       <section id="minors">
-        <h2>15. Minors / payout design</h2>
+        <h2>15. Intended users</h2>
 
-        <p>Design patterns to allow minors to obtain value while limiting legal risk:</p>
-        <ol>
-          <li>Spend-first partner redemption: immediate conversion of iVucx to curated vendor credits (books, courses, hardware vouchers) without fiat transfer.</li>
-          <li>Gift-card / prepaid channel: small monthly cap (configurable; recommended default equivalent to 100 USD) for voucher conversion without KYC; larger conversions require custodial partner or KYC.</li>
-          <li>Custodial trustee flow: route larger sums to licensed custodial partners with guardian controls.</li>
-          <li>Grant/scholarship routing: sponsors pay institutions or scholarship accounts rather than direct minor payouts.</li>
-          <li>Tiered KYC and holds: minors may withdraw subject to stricter checks and longer hold periods.</li>
-        </ol>
+        <p>PROVF is intended for users who can lawfully choose, upload, import, and store files through the platform. PROVF is not directed to children under the age required by applicable law for independent use of online services.</p>
 
-        <p>All reward language in TOS must use non-contractual terms ("reward", "prize", "grant") and avoid wage-like commitments.</p>
+        <p>If PROVF becomes aware that it has collected information from a child in a manner that requires parental consent and such consent has not been provided, PROVF will take appropriate steps to delete or limit that information.</p>
       </section>
 
       <section id="data-model">
-        <h2>16. Data model (core tables)</h2>
+        <h2>16. Data categories</h2>
 
-        <p>Core conceptual tables (Postgres-style names): <code>users</code>, <code>posts</code>, <code>answers</code>, <code>papers</code>, <code>debates</code>, <code>claims</code>, <code>supports</code>, <code>ivucx_ledger</code>, <code>escrow</code>, <code>trust_features</code>, <code>audit_log</code>, <code>citation_index</code>. Each table includes immutable primary keys, created/updated timestamps, and cryptographic integrity checks (hashes) for critical records.</p>
+        <p>PROVF's data categories can be summarized as follows:</p>
+
+        <table>
+          <tr>
+            <th>Category</th>
+            <th>Examples</th>
+            <th>Purpose</th>
+          </tr>
+          <tr>
+            <td>User-selected files</td>
+            <td>Documents, images, PDFs, archives, or other files chosen by the user</td>
+            <td>Read and store the files on the PROVF platform</td>
+          </tr>
+          <tr>
+            <td>File metadata</td>
+            <td>Name, type, size, timestamps, source identifiers</td>
+            <td>Upload handling, indexing, retrieval, security, and support</td>
+          </tr>
+          <tr>
+            <td>Account data</td>
+            <td>User ID, email address, display name, authentication records</td>
+            <td>Sign-in, account association, access control, and support</td>
+          </tr>
+          <tr>
+            <td>Operational logs</td>
+            <td>Upload events, errors, access logs, device/browser details</td>
+            <td>Reliability, security, debugging, and abuse prevention</td>
+          </tr>
+        </table>
       </section>
 
       <section id="api">
-        <h2>17. API surface (selected endpoints)</h2>
+        <h2>17. Processing surface</h2>
 
         <pre>
-POST /v1/posts
-POST /v1/posts/{id}/support
-POST /v1/posts/{id}/answers
-GET  /v1/feed?user={}&limit={}
-GET  /v1/posts/{id}/answers?sort=trust
-POST /v1/posts/{id}/start_debate
-POST /v1/debates/{id}/claims
-GET  /v1/debates/{id}/score
-POST /v1/posts/{id}/approve
-GET  /v1/trust/{answer_id}
-POST /v1/ivucx/deposit
-POST /v1/ivucx/withdraw
+User chooses a file
+PROVF reads the selected file
+PROVF uploads or imports the selected file
+PROVF stores the selected file on the PROVF platform
+User manages, retrieves, or deletes the stored file
         </pre>
 
-        <p>Authentication: JWT over TLS. All financial endpoints produce immutable ledger entries. Endpoints must validate inputs, enforce rate limits, and produce deterministic outputs for identical inputs.</p>
+        <p>Any API, import process, or upload process connected to Google data should match this flow and should not request broader access than PROVF needs for the user-selected file operation.</p>
       </section>
 
       <section id="ui">
-        <h2>18. UI rules and UX cues</h2>
+        <h2>18. User-facing notices</h2>
 
         <ul>
-          <li>Always display trust score \(T\) and a concise explanation of top contributing features for each answer.</li>
-          <li>Clearly indicate per-post anonymity (e.g., "This post was submitted anonymously; identity is not shown").</li>
-          <li>Conspicuously mark J and N# states and explain citation consequences.</li>
-          <li>When a debate is active, show Z scores, remaining time, and major contributing evidence items.</li>
-          <li>Remind posters every 60 days to take action on open posts.</li>
+          <li>The app name <strong>PROVF</strong> should be shown consistently on the home page, consent screen, support materials, and privacy policy.</li>
+          <li>The user interface should make clear that selected files will be read and saved to the PROVF platform.</li>
+          <li>The privacy policy should remain easy to find from the PROVF home page and from the Google OAuth consent screen configuration.</li>
+          <li>Upload or import controls should accurately describe what will happen before the user provides a file.</li>
+          <li>Deletion, permission revocation, and support contact options should be available where practical.</li>
         </ul>
       </section>
 
       <section id="kpis">
-        <h2>19. KPIs and evaluation</h2>
+        <h2>19. Policy accuracy</h2>
 
-        <p>Quality KPIs: Precision@1 (human adjudicated), Brier score for trust-score calibration, calibration curves, ECE.</p>
-        <p>Engagement KPIs: time_to_first_answer, acceptance rate, average answers per post.</p>
-        <p>Economy KPIs: average bounty, iVucx velocity, Gini coefficient of iVucx distribution.</p>
-        <p>Safety KPIs: fraud_flag_rate, dispute resolution time, percent of J outcomes vs H/N#.</p>
+        <p>PROVF should keep this page aligned with actual product behavior. If PROVF changes what data it accesses, how it uses selected files, where it stores files, or how it shares data, this page should be updated before or at the time the changed practice begins.</p>
+
+        <p>For review purposes, the key disclosure is that PROVF reads files selected by the user and stores those files on the PROVF platform.</p>
       </section>
 
       <section id="mvp">
-        <h2>20. Implementation priorities (MVP)</h2>
+        <h2>20. Operational commitments</h2>
 
         <ol>
-          <li>Immutable double-entry ledger and escrow subsystem with audit logs.</li>
-          <li>Anonymous post UI with per-post display IDs and media storage.</li>
-          <li>Basic iVucx deposit (adult) and withdrawal hooks with KYC placeholders.</li>
-          <li>Answer submission pipeline and trust-score prototype (feature extractor + linear model + calibration).</li>
-          <li>Automatic distribution logic for deadlines and rounding policy.</li>
-          <li>Debate scaffolding (start, submit claims, compute overlap) and J/N#/H tagging.</li>
-          <li>Basic fraud detection (rate limits, device/IP heuristics, duplicate detection).</li>
+          <li>Keep PROVF's app name, logo, home page, privacy policy, and consent-screen details consistent.</li>
+          <li>Limit requested Google scopes to those needed for user-selected file reading and storage.</li>
+          <li>Protect stored files with appropriate access controls and operational monitoring.</li>
+          <li>Provide a reasonable path for deletion requests and account support.</li>
+          <li>Keep this privacy policy available to users without requiring login.</li>
         </ol>
       </section>
 
       <section id="risks">
-        <h2>21. Risks and mitigations</h2>
+        <h2>21. Risk controls</h2>
 
-        <p>Major risks: regulatory (payments, minors), sybil/collusion, misinformation, economic exploitation. Mitigations: legal counsel, tiered KYC, custodial partners, graph analytics, human review for high-risk categories, reserve and anti-abuse sinks, and fee policy.</p>
+        <p>Primary privacy risks include accidental upload of unintended files, excessive authorization scope, unauthorized access to stored files, unclear retention expectations, and mismatch between policy text and product behavior.</p>
+
+        <p>PROVF reduces these risks by relying on user-selected files, limiting access to the stated purpose, using access controls, documenting storage and deletion practices, and keeping the policy current with the app's real behavior.</p>
       </section>
 
       <section id="summary">
-        <h2>22. Final conceptual summary</h2>
+        <h2>22. Summary</h2>
 
-        <p>Express-Path is a content-centric knowledge market and multimodal publication system that enforces per-post anonymity, algorithmic trust scoring, configurable economic incentives (iVucx), supporter stakes, and a formal debate-to-citation pipeline (J/G/H/N#). The platform requires robust ledger integrity, deterministic adjudication pipelines, fraud detection, and legal compliance mechanisms to operate safely and predictably.</p>
+        <p><strong>PROVF</strong> is a file reading and storage application. Its purpose is to let users select files, allow PROVF to read those selected files, and save them to the PROVF platform. PROVF's privacy policy discloses the access, use, storage, sharing, retention, deletion, and security practices connected to those files and related Google user data.</p>
       </section>
 
       <section id="appendix">
-        <h2>Appendix: Formal evaluation method (integrated from attached assessment)</h2>
+        <h2>Appendix: contact and updates</h2>
 
-        <p class="muted">The following appendix reproduces and completes the formal evaluation method for computing answer credibility \(\mathcal{L}\) and rebuttal credibility \(\mathcal{E}\). All definitions are explicit and calibrated probabilities are required.</p>
+        <p class="muted">Contact for privacy questions, deletion requests, or app review questions: <strong>pdx.error@gmail.com</strong>.</p>
 
-        <h3>1. Probabilistic definitions and notation</h3>
+        <h3>Policy updates</h3>
 
-        <p>Given question \(Q\), candidate answer \(A\), and candidate rebuttal \(E\), define binary events:</p>
-        <ul>
-          <li>\(R_A\): answer \(A\) is relevant to \(Q\).</li>
-          <li>\(C_A\): reasoning in \(A\) is internally consistent.</li>
-          <li>\(F_A\): \(A\) is factually precise / sufficiently specified.</li>
-          <li>\(R_E, C_E, F_E\): analogous events for rebuttal \(E\) with respect to \(A\).</li>
-          <li>\(\zeta\): event that \(E\) successfully refutes at least one key claim of \(A\).</li>
-        </ul>
-
-        <h3>2. Component posterior probabilities (calibrated)</h3>
-
-        <div class="math-block">
-          \[
-          \begin{aligned}
-          \mathcal{Q}_A &:= P(R_A=1\mid A,Q),\quad
-          \alpha_A := P(C_A=1\mid A,Q),\quad
-          \mathcal{F}_A := P(F_A=1\mid A,Q),\\[6pt]
-          \mathcal{Q}_E &:= P(R_E=1\mid E,A),\quad
-          \alpha_E := P(C_E=1\mid E,A),\quad
-          \mathcal{F}_E := P(F_E=1\mid E,A),\quad
-          \zeta := P(\text{``}E\text{ refutes }A\text{''}\mid E,A).
-          \end{aligned}
-          \]
-        </div>
-
-        <p class="muted">End of appendix.</p>
+        <p>PROVF may update this policy when the app, storage process, Google authorization scope, or legal requirements change. The effective date at the top of this page should be updated whenever the policy materially changes.</p>
       </section>
 
       <footer>
-        <p class="muted">If you require a machine-readable OpenAPI v3 specification, Postgres DDL for the core tables, or deterministic pseudocode (Python-style) that implements the trust-scoring and debate overlap algorithms exactly as specified above, I will produce one of those artifacts next. Contact for delivery or questions: <strong>pdx.error@gmail.com</strong>.</p>
+        <p class="muted">PROVF privacy and app purpose disclosure. Contact: <strong>pdx.error@gmail.com</strong>.</p>
       </footer>
     </div>
   </main>
